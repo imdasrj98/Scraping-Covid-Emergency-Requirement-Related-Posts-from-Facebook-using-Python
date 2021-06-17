@@ -94,7 +94,6 @@ class scrape:
 
 		pageContent = self.driver.page_source
 		self.soup = BeautifulSoup(pageContent, 'lxml')
-		#print(self.soup)
 
 	def getPostCaptions(self, mydivstr):
 		result = []
@@ -118,8 +117,6 @@ class scrape:
 
 		mydivs = self.soup.find_all("div", {"class": "ecm0bbzt hv4rvrfc ihqw7lf3 dati1w0a"})
 		mydivs.extend(self.soup.find_all("div", {"class": "rq0escxv l9j0dhe7 du4w35lb j83agx80 cbu4d94t g5gj957u d2edcug0 hpfvmrgz rj1gh0hx buofh1pr p8fzw8mz pcp91wgn iuny7tx3 ipjc6fyt"}))
-		#print(mydivs)
-		#input()
 		mydivstr = []
 
 		for divs in mydivs:

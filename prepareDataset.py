@@ -9,7 +9,6 @@ if __name__ == '__main__':
 	scrapeObj.loginToFacebook(driver)
 
 	queryList = ['oxygen%20required', 'bed%20required', 'hospital%20bed%20required', 'blood%20required', 'oxygen%20need', 'blood%20need', 'oxygen', 'bed', 'hospital', 'blood']
-	#queryList = ['oxygen', 'bed', 'hospital', 'blood']
 	dflist = []
 	for query in queryList:
 		df = scrapeObj.getDataSet(query, driver)
