@@ -13,11 +13,16 @@ class scrape:
 	def init(self):
 		pass
 
-	def loginToFacebook(self):
+	def getDriver(self):
 		chrome_options = webdriver.ChromeOptions()
 		chrome_options.add_argument("--disable-notifications")
 
 		self.driver = webdriver.Chrome('chromedriver.exe')
+
+		return self.driver
+
+	def loginToFacebook(self, driver):
+		self.driver = driver
 		self.url = 'https://www.facebook.com'
 		self.driver.get(self.url)
 		time.sleep(2)
@@ -35,7 +40,7 @@ class scrape:
 		searchURL = 'https://www.facebook.com/search/posts/?q=' + self.query
 		self.driver.get(searchURL)
 
-		time.sleep(5)
+		time.sleep(3)
 
 		SCROLL_PAUSE_TIME = 3
 
@@ -89,11 +94,12 @@ class scrape:
 
 		pageContent = self.driver.page_source
 		self.soup = BeautifulSoup(pageContent, 'lxml')
+		#print(self.soup)
 
 	def getPostCaptions(self, mydivstr):
 		result = []
 		for div in mydivstr:
-		    tempstr = div[1:len(mydivstr[0])-1]
+		    tempstr = div[1:len(div)-1]
 		    tempstr=re.sub('"', "", tempstr)
 		    resultstr=''
 		    while tempstr:
@@ -111,6 +117,9 @@ class scrape:
 		self.getPageContent()
 
 		mydivs = self.soup.find_all("div", {"class": "ecm0bbzt hv4rvrfc ihqw7lf3 dati1w0a"})
+		mydivs.extend(self.soup.find_all("div", {"class": "rq0escxv l9j0dhe7 du4w35lb j83agx80 cbu4d94t g5gj957u d2edcug0 hpfvmrgz rj1gh0hx buofh1pr p8fzw8mz pcp91wgn iuny7tx3 ipjc6fyt"}))
+		#print(mydivs)
+		#input()
 		mydivstr = []
 
 		for divs in mydivs:
