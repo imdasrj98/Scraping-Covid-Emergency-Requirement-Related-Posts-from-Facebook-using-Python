@@ -50,7 +50,7 @@ class scrape:
 
 		while True:
 		    currenttime=time.time()
-		    if currenttime-starttime>20:
+		    if currenttime-starttime>720:
 		        break
 		        
 		    try:    
@@ -83,6 +83,12 @@ class scrape:
 		    if new_height == last_height:
 		        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		    last_height = new_height
+
+		    try:
+		    	if self.driver.find_element_by_xpath("//*[contains(text(), 'End of results')]"):
+		    		break
+		    except:
+		    	pass
 		    
 		try:
 		    self.driver.find_element_by_xpath("//*[contains(text(),'See more')]").click()
